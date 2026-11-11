@@ -50,7 +50,7 @@ tracked in go-widgets/toolkit.
 
 ## Tests
 
-- Statement coverage is 83.4 % at the move; CI holds a floor of 83 %.
+- 100 % statement coverage, gated in CI (it was 83.4 % in go-slides/slides).
 - `FuzzWrite` fuzzes the parser for 45 s on every change; the corpus is
   committed in `testdata/fuzz/FuzzWrite`. It asserts the cursor stays on the
   screen and every run is valid UTF-8.

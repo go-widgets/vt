@@ -27,14 +27,12 @@ jobs:
         run: GOOS=js GOARCH=wasm go vet ./...
       - name: test
         run: go test -race -count=1 ./...
-      # The module came from go-slides/slides at 83.4% with no gate; this is a
-      # floor, not the goal. Raise it as the tests grow.
-      - name: coverage floor (83%)
+      - name: coverage gate (100%)
         shell: bash
         run: |
           go test -count=1 -coverprofile=cov.out ./...
           go tool cover -func=cov.out | tee cov.txt
-          grep -Eq 'total:.*(8[3-9]|9[0-9]|100)\.[0-9]%' cov.txt || { echo "coverage below 83%"; exit 1; }
+          grep -q 'total:.*100.0%' cov.txt || { echo "coverage below 100%"; exit 1; }
 
   linux-386:
     runs-on: ubuntu-latest
